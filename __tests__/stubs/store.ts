@@ -29,9 +29,8 @@ export class StubStore<K, T> implements ICacheStore<K, T> {
 		return this.store.has(key);
 	}
 
-	public putMany(values: Record<string | number | symbol, T>): boolean[] {
-		// @ts-ignore
-		return Object.keys(values).map(key => this.put(key, values[key]));
+	public putMany(values: Array<[K, T]>): boolean[] {
+		return values.map((value: [K, T]) => this.put(value[0], value[1]));
 	}
 
 	public has(key: K): boolean {

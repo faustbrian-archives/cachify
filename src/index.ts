@@ -32,7 +32,7 @@ export interface ICacheStore<K, T> {
 	/**
 	 * Store multiple items in the cache for a given number of seconds.
 	 */
-	putMany(values: Record<string | number | symbol, T>, seconds: number): boolean[];
+	putMany(values: Array<[K, T]>, seconds: number): boolean[];
 
 	/**
 	 * Determine if an item exists in the cache.
