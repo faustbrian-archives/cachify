@@ -1,5 +1,20 @@
 export interface ICacheStore<K, T> {
 	/**
+	 * Get all of the items in the cache.
+	 */
+	all(): Array<[K, T]>;
+
+	/**
+	 * Get the keys of the cache items.
+	 */
+	keys(): K[];
+
+	/**
+	 * Get the values of the cache items.
+	 */
+	values(): T[];
+
+	/**
 	 * Retrieve an item from the cache by key.
 	 */
 	get(key: K): T | undefined;
