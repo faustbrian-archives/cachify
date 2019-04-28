@@ -55,9 +55,8 @@ export class StubStore<K, T> implements ICacheStore<K, T> {
 		return this.store.has(key);
 	}
 
-	public foreverMany(values: Record<string | number | symbol, T>): boolean[] {
-		// @ts-ignore
-		return Object.keys(values).map(key => this.forever(key, values[key]));
+	public foreverMany(values: Array<[K, T]>): boolean[] {
+		return values.map((value: [K, T]) => this.forever(value[0], value[1]));
 	}
 
 	public forget(key: K): boolean {

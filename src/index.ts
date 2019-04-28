@@ -62,7 +62,7 @@ export interface ICacheStore<K, T> {
 	/**
 	 * Store multiple items in the cache indefinitely.
 	 */
-	foreverMany(values: Record<string | number | symbol, T>, value: T): boolean[];
+	foreverMany(values: Array<[K, T]>, value: T): boolean[];
 
 	/**
 	 * Remove an item from the cache.
