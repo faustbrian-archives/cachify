@@ -3,7 +3,7 @@ jobs:
     node-10:
         docker:
             - image: circleci/node:10
-        working_directory: ~/package-name
+        working_directory: ~/abstract-cache
         steps:
             - checkout
             - restore_cache:
@@ -19,7 +19,23 @@ jobs:
     node-11:
         docker:
             - image: circleci/node:11
-        working_directory: ~/package-name
+        working_directory: ~/abstract-cache
+        steps:
+            - checkout
+            - restore_cache:
+                  keys:
+                      - v1-dependencies-{{ checksum "yarn.lock" }}
+                      - v1-dependencies-
+            - run: yarn install
+            - save_cache:
+                  paths:
+                      - node_modules
+                  key: v1-dependencies-{{ checksum "yarn.lock" }}
+            - run: yarn test
+    node-12:
+        docker:
+            - image: circleci/node:12
+        working_directory: ~/abstract-cache
         steps:
             - checkout
             - restore_cache:
@@ -38,3 +54,4 @@ workflows:
         jobs:
             - node-10
             - node-11
+            - node-12
